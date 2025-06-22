@@ -7,8 +7,11 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./docs/swagger.yml');
 
+const cors = require('cors');
+
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use('/roles', roleRoutes);
 
