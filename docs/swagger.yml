@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  title: User Role API
+  version: 1.0.0
+  description: >
+    This API allows retrieving user role information by user ID.  
+    **The userId parameter is required.**  
+    If the user ID is not found or has no assigned role, the server will respond with a `404 Not Found` error.  
+    The API uses Sequelize ORM with MariaDB database to manage user roles and role relationships.
+paths:
+  /roles/user-role/{userId}:
+    get:
+      summary: Get user role by user ID
+      description: >
+        Retrieves the role information for a specific user.  
+        The API performs a join query between UserRole and Role tables to fetch the complete role details.  
+        Returns the user ID along with their assigned role name.
+      tags:
+        - Role
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: >
+            The unique identifier of the user. **Required.**  
+            Must be a valid user ID string that exists in the system.
+          schema:
+            type: string
+            example: "user123"
+      responses:
+        '200':
+          description: User role retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    example: "user123"
+                    description: The user's unique identifier
+                  role:
+                    type: string
+                    example: "Administrator"
+                    description: The name of the role assigned to the user
+        '404':
+          description: Not Found – Role not found for this user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Role not found for this user."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Server error"
+components:
+  schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: The unique identifier for the role
+        roleName:
+          type: string
+          example: "Administrator"
+          description: The name of the role (unique)
+    UserRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: The unique identifier for the user-role relationship
+        userId:
+          type: string
+          example: "user123"
+          description: The user's unique identifier
+        roleId:
+          type: integer
+          example: 1
+          description: The role's unique identifier (foreign key to Role table)
+    UserRoleResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: "user123"
+          description: The user's unique identifier
+        role:
+          type: string
+          example: "Administrator"
+          description: The name of the role assigned to the user

@@ -30,7 +30,7 @@ The **Role Retrieval Service** is a specialized query microservice in the Shaggy
 ## 🛠️ Tech Stack
 
 - **Runtime**: Node.js with Express.js framework
-- **Database**: PostgreSQL with Sequelize ORM
+- **Database**: MariaDB with Sequelize ORM
 - **Query Optimization**: Relational joins for efficient data retrieval
 - **RESTful Design**: Clean API endpoints for role queries
 - **Data Modeling**: Foreign key relationships between users and roles
