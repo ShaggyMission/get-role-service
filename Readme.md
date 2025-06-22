@@ -44,12 +44,24 @@ The **Role Retrieval Service** is a specialized query microservice in the Shaggy
 - Returns user ID and corresponding role name
 - Used by authentication services for permission verification
 
+**Response Example:**
 ```json
 {
   "userId": "abc123xyz789",
   "role": "Contributor"
 }
 ```
+
+**Error Responses:**
+- `404 Not Found`: When user has no assigned role
+- `500 Internal Server Error`: Database or server errors
+
+### API Documentation
+**`GET /roles/getrol-docs`**
+- Interactive Swagger UI documentation
+- Complete API specification with examples
+- Request/response schemas and validation rules
+- Try-it-out functionality for testing endpoints
 
 ## 🔧 Core Functionality
 
