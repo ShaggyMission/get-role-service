@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use('/roles', roleRoutes);
 
-app.use('roles/getrol-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/roles/getrol-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = process.env.PORT || 3003;
 
